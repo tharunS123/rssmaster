@@ -29,6 +29,7 @@ struct FeedSelectorView: View {
     var body: some View {
         NavigationStack {
             List {
+                // Animated content
                 Section("Popular Feeds") {
                     ForEach(popularFeeds, id: \.0) { (name, url) in
                         Button(action: {
@@ -37,14 +38,19 @@ struct FeedSelectorView: View {
                         }) {
                             HStack {
                                 Text(name)
+                                    .foregroundColor(.primary)
                                 Spacer()
                                 if viewModel.currentFeedName == name {
                                     Image(systemName: "checkmark")
                                         .foregroundColor(.blue)
+                                        .transition(.scale)
                                 }
                             }
+                            .padding(.vertical, 8)
                         }
+                        .buttonStyle(.plain)
                     }
+                    .listRowBackground(Color(.systemGray6).opacity(0.5))
                 }
 
                 Section {
@@ -53,6 +59,8 @@ struct FeedSelectorView: View {
                             .keyboardType(.URL)
                             .autocapitalization(.none)
                             .disableAutocorrection(true)
+                            .foregroundColor(.primary)
+                            .transition(.slide)
 
                         Button("Add Custom Feed") {
                             if !customURL.isEmpty {
@@ -61,12 +69,17 @@ struct FeedSelectorView: View {
                             }
                         }
                         .disabled(customURL.isEmpty)
+                        .transition(.slide)
                     } else {
                         Button("Add Custom Feed") {
-                            showCustomInput = true
+                            withAnimation {
+                                showCustomInput = true
+                            }
                         }
+                        .transition(.slide)
                     }
                 }
+                .listRowBackground(Color(.systemGray6).opacity(0.5))
             }
             .navigationTitle("Select Feed")
             .navigationBarTitleDisplayMode(.inline)
