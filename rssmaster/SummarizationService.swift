@@ -29,7 +29,7 @@ actor SummarizationService {
     static let shared = SummarizationService()
 
     // NOTE: For production, do NOT hardcode API keys. Use secure storage or a backend proxy.
-    private let apiKey: String = "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"
+    private let apiKey: String = "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"
     private let endpoint = URL(string: "https://openrouter.ai/api/v1/chat/completions")!
 
     func summarize(title: String, description: String) async throws -> String {

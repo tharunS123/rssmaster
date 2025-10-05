@@ -98,10 +98,31 @@ struct EpisodeDetailView: View {
                                 .font(.headline)
                         }
                     }
-                    .buttonStyle(DarkGradientButtonStyle())
-                    .padding(.horizontal)
-                    
-                    if audioManager.duration > 0 {
+                     .buttonStyle(DarkGradientButtonStyle())
+                     .padding(.horizontal)
+
+                     // Notes Section
+                     VStack(alignment: .leading, spacing: 10) {
+                         Text("Notes")
+                             .font(.headline)
+                             .foregroundStyle(.primary)
+
+                         ZStack {
+                             NotepadBackground()
+                             TextEditor(text: $notesText)
+                                 .scrollContentBackground(.hidden)
+                                 .background(Color.clear)
+                                 .padding(12)
+                                 .font(.body)
+                                 .foregroundStyle(.primary)
+                         }
+                         .frame(minHeight: 150)
+                         .clipShape(Rectangle())
+                     }
+                     .padding(.horizontal)
+                     .padding(.top, 10)
+
+                     if audioManager.duration > 0 {
                         VStack(spacing: 12) {
                             // Scrubber
                             Slider(value: Binding(
@@ -156,26 +177,6 @@ struct EpisodeDetailView: View {
                         .font(.body)
                         .foregroundStyle(.primary)
                         .lineSpacing(4)
-                }
-                .padding(.horizontal)
-
-                // Notes Section
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Notes")
-                        .font(.headline)
-                        .foregroundStyle(.primary)
-
-                    ZStack {
-                        NotepadBackground()
-                        TextEditor(text: $notesText)
-                            .scrollContentBackground(.hidden)
-                            .background(Color.clear)
-                            .padding(12)
-                            .font(.body)
-                            .foregroundStyle(.primary)
-                    }
-                    .frame(minHeight: 200)
-                    .clipShape(Rectangle())
                 }
                 .padding(.horizontal)
                 
