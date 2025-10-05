@@ -146,7 +146,20 @@ struct EpisodeDetailView: View {
                     }
                 }
                 
-                // Episode Description replaced with Notes editor
+                // Episode Description
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Description")
+                        .font(.headline)
+                        .foregroundStyle(.primary)
+
+                    Text(episode.cleanDescription)
+                        .font(.body)
+                        .foregroundStyle(.primary)
+                        .lineSpacing(4)
+                }
+                .padding(.horizontal)
+
+                // Notes Section
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Notes")
                         .font(.headline)
@@ -160,11 +173,6 @@ struct EpisodeDetailView: View {
                             .padding(12)
                             .font(.body)
                             .foregroundStyle(.primary)
-                    }
-                    .onAppear {
-                        if notesText.isEmpty {
-                            notesText = episode.cleanDescription
-                        }
                     }
                     .frame(minHeight: 200)
                     .clipShape(Rectangle())
