@@ -12,6 +12,7 @@ struct EpisodeDetailView: View {
     let episode: PodcastEpisode
     @State private var isSummarizing = false
     @State private var notesText: String = ""
+    @State private var showNotes = false
     
     var body: some View {
         ScrollView {
@@ -81,8 +82,10 @@ struct EpisodeDetailView: View {
                             do {
                                 let summary = try await SummarizationService.shared.summarize(title: episode.title, description: episode.cleanDescription)
                                 notesText = summary
+                                showNotes = true
                             } catch {
                                 notesText = "Failed to generate summary. Please try again.\n\n\(error.localizedDescription)"
+                                showNotes = true
                             }
                         }
                     }) {
@@ -101,26 +104,29 @@ struct EpisodeDetailView: View {
                      .buttonStyle(DarkGradientButtonStyle())
                      .padding(.horizontal)
 
-                     // Notes Section
-                     VStack(alignment: .leading, spacing: 10) {
-                         Text("Notes")
-                             .font(.headline)
-                             .foregroundStyle(.primary)
-
-                         ZStack {
-                             NotepadBackground()
-                             TextEditor(text: $notesText)
-                                 .scrollContentBackground(.hidden)
-                                 .background(Color.clear)
-                                 .padding(12)
-                                 .font(.body)
+                     if showNotes {
+                         // Notes Section
+                         VStack(alignment: .leading, spacing: 10) {
+                             Text("Notes")
+                                 .font(.headline)
                                  .foregroundStyle(.primary)
+
+                             ZStack {
+                                 NotepadBackground()
+                                 TextEditor(text: $notesText)
+                                     .scrollContentBackground(.hidden)
+                                     .background(Color.clear)
+                                     .padding(12)
+                                     .font(.body)
+                                     .foregroundStyle(.primary)
+                             }
+                             .frame(minHeight: 150)
+                             .clipShape(Rectangle())
+                             .transition(.slide)
                          }
-                         .frame(minHeight: 150)
-                         .clipShape(Rectangle())
+                         .padding(.horizontal)
+                         .padding(.top, 10)
                      }
-                     .padding(.horizontal)
-                     .padding(.top, 10)
 
                      if audioManager.duration > 0 {
                         VStack(spacing: 12) {
