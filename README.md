@@ -7,10 +7,12 @@ A modern, native iOS app for browsing and listening to podcasts via RSS feeds. B
 - **RSS Feed Parsing**: Parses podcast RSS feeds to display episodes with metadata
 - **Audio Playback**: Full-featured audio player with play/pause, seeking, skip controls, and variable playback speed
 - **Episode Summarization**: AI-powered summaries using OpenRouter API (DeepSeek model) for quick episode overviews
+- **Feed Selection**: Choose from popular podcasts or add custom RSS feeds via the menu button
 - **Pull to Refresh**: Refresh feed for latest episodes
 - **Dark Mode**: Native dark theme interface
 - **iOS Native UI**: Clean, responsive design following iOS design guidelines
 - **Custom Loading Animations**: Unique blade and shuriken loading indicators
+- **Persistent Feed Selection**: Remembers your selected feed across app launches
 
 ## Screenshots
 
@@ -32,10 +34,11 @@ A modern, native iOS app for browsing and listening to podcasts via RSS feeds. B
 ## Usage
 
 1. **Browse Episodes**: The app loads NPR Planet Money episodes by default
-2. **View Details**: Tap any episode to see full description and controls
-3. **Play Audio**: Use the play button to start listening
-4. **Summarize**: Tap the summarize button to get an AI-generated episode summary
-5. **Controls**: Use playback controls for seeking, skipping, and speed adjustment
+2. **Select Feed**: Tap the list icon (≡) in the top left to choose from popular podcasts or add a custom RSS feed
+3. **View Details**: Tap any episode to see full description and controls
+4. **Play Audio**: Use the play button to start listening
+5. **Summarize**: Tap the summarize button to get an AI-generated episode summary
+6. **Controls**: Use playback controls for seeking, skipping, and speed adjustment
 
 ### Changing Podcast Feed
 

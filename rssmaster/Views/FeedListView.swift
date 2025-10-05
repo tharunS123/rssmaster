@@ -9,7 +9,8 @@ import SwiftUI
 
 struct FeedListView: View {
     @StateObject private var viewModel = FeedViewModel()
-    
+    @State private var showFeedSelector = false
+
     var body: some View {
         NavigationStack {
             List {
@@ -19,8 +20,15 @@ struct FeedListView: View {
                     }
                 }
             }
-            .navigationTitle("Planet Money")
+            .navigationTitle(viewModel.currentFeedName)
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        showFeedSelector = true
+                    }) {
+                        Image(systemName: "list.bullet")
+                    }
+                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         Task {
@@ -59,6 +67,9 @@ struct FeedListView: View {
             }
             .task {
                 await viewModel.loadFeed()
+            }
+            .sheet(isPresented: $showFeedSelector) {
+                FeedSelectorView(viewModel: viewModel)
             }
         }
     }
